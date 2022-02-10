@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Input from '../../components/Input';
 import LoginButton from '../../components/LoginButton';
-import Container, { data } from './styles';
+import { Container, data } from './styles';
 import Logo from '../../assets/logo.png';
 
 export default function SignUp() {
@@ -40,7 +40,7 @@ export default function SignUp() {
         <Input type="password" value={confirmPassword} disabled={isLoading} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirme a senha" required />
         <LoginButton>{isLoading ? <data.Component {...data.props} /> : 'Cadastrar'}</LoginButton>
       </form>
-      <Link to="/">Já tem uma conta? Entre agora!</Link>
+      <Link to="/sign-in">Já tem uma conta? Entre agora!</Link>
     </Container>
   );
 }
