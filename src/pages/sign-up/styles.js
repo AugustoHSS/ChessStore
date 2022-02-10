@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ThreeDots } from 'react-loader-spinner';
 
-const Container = styled.div`
+export const Container = styled.div`
     height: 100vh;
     background-color: #22272B;
     padding: 5%;
@@ -11,7 +11,7 @@ const Container = styled.div`
     align-items: center;
     a{
         all: unset;
-        margin-top: 3%;
+        margin-top: 5%;
         color: #D5D6D6;
         text-align: center;
     }
@@ -35,5 +35,3 @@ export const data = {
     color: '#22282C',
   },
 };
-
-export default Container;
