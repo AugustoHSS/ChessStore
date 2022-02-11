@@ -2,8 +2,13 @@ import axios from 'axios'
 
 const BASE_URL = 'http://localhost:5000'
 
-function getProducts() {
-  const promise = axios.get(`${BASE_URL}/home`)
+function createConfig(token) {
+  return { headers: { Authorization: `Bearer ${token}` } }
+}
+
+function getProducts(token) {
+  const config = createConfig(token)
+  const promise = axios.get(`${BASE_URL}/home`, config)
   return promise
 }
 

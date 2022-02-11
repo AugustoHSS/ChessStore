@@ -5,12 +5,14 @@ import Input from '../../components/Input'
 import { Container, data } from './styles'
 import LoginButton from '../../components/LoginButton'
 import Logo from '../../assets/logo.png'
+import useAuth from '../../hook/useAuth'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const { setToken, setUsername } = useAuth()
 
   function login(e) {
     e.preventDefault()
@@ -19,9 +21,11 @@ export default function SignIn() {
       email,
       password,
     })
-    promise.then(() => {
-      navigate('/home')
+    promise.then((response) => {
+      setToken(response.data.token)
+      setUsername(response.data.name)
       setIsLoading(false)
+      navigate('/home')
     })
     promise.catch((error) => {
       alert(error.response.data)
@@ -49,8 +53,7 @@ export default function SignIn() {
           placeholder="Senha"
           required
         />
-        <LoginButton disabled={isLoading}>
-          {' '}
+        <LoginButton>
           {isLoading ? <data.Component {...data.props} /> : 'Cadastrar'}
         </LoginButton>
       </form>
