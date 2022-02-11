@@ -1,8 +1,8 @@
 import { Container, Header } from '../../components'
-import { cartIcon, gridIcon, arrowBack, logoutIcon } from '../../assets/'
+import { cartIcon, gridIcon, arrowBack, logoutIcon } from '../../assets'
 import api from '../../services/api'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Image,
   Item,

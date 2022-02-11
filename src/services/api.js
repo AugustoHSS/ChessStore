@@ -12,9 +12,21 @@ function getProduct(param) {
   return promise
 }
 
+function getCartProducts() {
+  const promise = axios.get(`${BASE_URL}/cart`)
+  return promise
+}
+
+function getCupom(param) {
+  const promise = axios.get(`${BASE_URL}/cupom/${param}`)
+  return promise
+}
+
 const api = {
   getProducts,
   getProduct,
+  getCartProducts,
+  getCupom,
 }
 
 export default api
