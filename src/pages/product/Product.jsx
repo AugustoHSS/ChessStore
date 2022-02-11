@@ -13,9 +13,12 @@ import {
   Details,
   Button,
   Image,
+  ButtonGuest,
 } from './styles'
+import useAuth from '../../hook/useAuth'
 
 export default function Product() {
+  const { guest } = useAuth()
   const navigate = useNavigate()
   const { productId } = useParams()
   const [productData, setProductData] = useState(null)
@@ -76,9 +79,16 @@ export default function Product() {
         </StockDetails>
 
         <Details>{productData?.text}</Details>
-        <Button>
-          Adicionar ao Carrinho <img src={cartIconBlack} alt="Cart icon" />
-        </Button>
+
+        {guest ? (
+          <ButtonGuest onClick={() => navigate('/sign-up')}>
+            Cadastre-se
+          </ButtonGuest>
+        ) : (
+          <Button>
+            Adicionar ao Carrinho <img src={cartIconBlack} alt="Cart icon" />
+          </Button>
+        )}
       </ProductContainer>
     </Container>
   )

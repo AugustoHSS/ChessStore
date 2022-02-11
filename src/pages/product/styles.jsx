@@ -108,7 +108,47 @@ const Button = styled.button`
     background-color: #bba139;
     cursor: pointer;
   }
+
+  :disabled {
+    opacity: 0.5;
+  }
 `
+
+const ButtonGuest = styled.button`
+  all: unset;
+
+  transition: background-color 0.4s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 10px 20px;
+  padding: 20px 25px;
+
+  font-size: 1.3rem;
+  font-weight: 400;
+
+  color: #22272b;
+  background-color: #fcd12c;
+  border-radius: 20px;
+
+  img {
+    width: 30px;
+    height: 30px;
+  }
+
+  :hover {
+    transition: background-color 0.4s;
+    background-color: #bba139;
+    cursor: pointer;
+  }
+
+  :disabled {
+    opacity: 0.5;
+  }
+`
+
 export {
   ProductContainer,
   PathText,
@@ -118,4 +158,5 @@ export {
   Details,
   Button,
   Image,
+  ButtonGuest,
 }

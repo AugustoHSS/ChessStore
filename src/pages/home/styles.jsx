@@ -3,9 +3,11 @@ import styled from 'styled-components'
 const Sidebar = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 240px;
 
-  width: ${(props) => (props.show ? '200px' : '0px')};
+  width: ${(props) => (props.show ? '300px' : '0px')};
   min-height: 100vh;
 
   padding: ${(props) => (props.show ? '10px 10px' : '0px')};
@@ -119,4 +121,29 @@ const Image = styled.div`
   background-position: center;
   border-radius: 10px;
 `
-export { Sidebar, TopSidebar, ItemsContainer, Item, Image, Logout }
+
+const GuestContainer = styled.div`
+  display: ${(props) => (props.show ? 'flex' : 'none')};
+  flex-direction: column;
+
+  img {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+`
+export {
+  Sidebar,
+  TopSidebar,
+  ItemsContainer,
+  Item,
+  Image,
+  Logout,
+  GuestContainer,
+}
