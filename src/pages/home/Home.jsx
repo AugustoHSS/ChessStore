@@ -1,3 +1,4 @@
+import React from 'react'
 import { Container, Header } from '../../components'
 import { cartIcon, gridIcon, arrowBack, logoutIcon } from '../../assets/'
 import api from '../../services/api'
