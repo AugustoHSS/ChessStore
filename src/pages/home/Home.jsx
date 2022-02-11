@@ -1,4 +1,5 @@
-import { Container, Header } from '../../components'
+import React from 'react'
+import { Container, Header, GuestSuggestion } from '../../components'
 import { cartIcon, gridIcon, arrowBack, logoutIcon } from '../../assets/'
 import api from '../../services/api'
 import { useNavigate } from 'react-router-dom'
@@ -10,22 +11,37 @@ import {
   Sidebar,
   TopSidebar,
   Logout,
+  GuestContainer,
 } from './styles'
+import useAuth from '../../hook/useAuth'
 
 export default function Home() {
   const navigate = useNavigate()
   const [products, setProducts] = useState(null)
   const [showSidebar, setShowSidebar] = useState(false)
+  const { username, token, guest, setGuest, setToken, setUsername } = useAuth()
 
   useEffect(() => {
-    const promise = api.getProducts()
+    const promise = api.getProducts(token)
 
-    promise.then((response) => setProducts(response.data))
-    promise.catch((error) => console.log(error.response))
-  }, [])
+    promise.then((response) => {
+      setProducts(response.data)
+      setGuest(false)
+    })
+    promise.catch((error) => {
+      setProducts(error.response.data)
+    })
+  }, [token])
 
   function handleClickProduct(id) {
     navigate(`/home/${id}`)
+  }
+
+  function handleLogout() {
+    setToken('')
+    setUsername('')
+    setGuest(true)
+    navigate('/sign-in')
   }
 
   return (
@@ -41,18 +57,31 @@ export default function Home() {
       </Header>
 
       <Sidebar show={showSidebar}>
-        <TopSidebar show={showSidebar}>
-          <h1>Olá Fulano</h1>
-          <img
-            onClick={() => setShowSidebar(false)}
-            src={arrowBack}
-            alt="Arrow back icon"
-          />
-        </TopSidebar>
-        <Logout onClick={() => navigate('/sign-in')} show={showSidebar}>
-          <img src={logoutIcon} alt="Logout Icon" />
-          <p>Logout</p>
-        </Logout>
+        {guest ? (
+          <GuestContainer show={showSidebar}>
+            <img
+              onClick={() => setShowSidebar(false)}
+              src={arrowBack}
+              alt="Arrow back icon"
+            />
+            <GuestSuggestion show={showSidebar} />
+          </GuestContainer>
+        ) : (
+          <>
+            <TopSidebar show={showSidebar}>
+              <h1>Olá {username}</h1>
+              <img
+                onClick={() => setShowSidebar(false)}
+                src={arrowBack}
+                alt="Arrow back icon"
+              />
+            </TopSidebar>
+            <Logout onClick={() => handleLogout()} show={showSidebar}>
+              <img src={logoutIcon} alt="Logout Icon" />
+              <p>Logout</p>
+            </Logout>
+          </>
+        )}
       </Sidebar>
 
       <ItemsContainer>
