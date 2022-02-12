@@ -18,7 +18,7 @@ import {
 import useAuth from '../../hook/useAuth'
 
 export default function Product() {
-  const { guest } = useAuth()
+  const { guest, token } = useAuth()
   const navigate = useNavigate()
   const { productId } = useParams()
   const [productData, setProductData] = useState(null)
@@ -48,6 +48,17 @@ export default function Product() {
     promise.catch((error) => console.log(error.response))
   }, [productId])
 
+  function addProductToCart() {
+    const body = {
+      productId,
+      name: productData.name,
+      image: productData.image,
+      price: productData.price,
+    }
+    const promise = api.addProductCart(body, token)
+    promise.then(() => alert('produto adicionado'))
+    promise.catch((error) => console.log(error.response.data))
+  }
   return (
     <Container>
       <Header>
@@ -85,7 +96,7 @@ export default function Product() {
             Cadastre-se
           </ButtonGuest>
         ) : (
-          <Button>
+          <Button onClick={() => addProductToCart()}>
             Adicionar ao Carrinho <img src={cartIconBlack} alt="Cart icon" />
           </Button>
         )}
