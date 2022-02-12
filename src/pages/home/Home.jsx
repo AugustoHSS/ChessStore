@@ -30,7 +30,7 @@ export default function Home() {
     promise.catch((error) => {
       setProducts(error.response.data)
     })
-  }, [token])
+  }, [])
 
   function handleClickProduct(id) {
     navigate(`/home/${id}`)

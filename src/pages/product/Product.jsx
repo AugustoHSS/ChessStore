@@ -46,7 +46,7 @@ export default function Product() {
       setProductData(response.data)
     })
     promise.catch((error) => console.log(error.response))
-  }, [productId])
+  }, [])
 
   function addProductToCart() {
     const body = {
