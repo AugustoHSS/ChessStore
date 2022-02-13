@@ -40,6 +40,12 @@ function deleteCartProduct(token, param) {
   return promise
 }
 
+function postCheckout(body, token) {
+  const config = createConfig(token)
+  const promise = axios.post(`${BASE_URL}/checkout`, body, config)
+  return promise
+}
+
 const api = {
   getProducts,
   getProduct,
@@ -47,6 +53,7 @@ const api = {
   getCupom,
   addProductCart,
   deleteCartProduct,
+  postCheckout,
 }
 
 export default api

@@ -26,15 +26,16 @@ export default function Product() {
     color: true,
     text: '',
   })
-
+  const [disable, setDisable] = useState(false)
   useEffect(() => {
     if (productData?.stock <= 20 && productData?.stock > 0) {
       setStockStatus({
         color: false,
         text: `Corra só restam ${productData?.stock}!`,
       })
-    } else if (productData?.stock === 0) {
+    } else if (productData?.stock <= 0) {
       setStockStatus({ color: false, text: `Esgotado` })
+      setDisable(true)
     } else {
       setStockStatus({ color: true, text: `Em estoque` })
     }
@@ -96,7 +97,7 @@ export default function Product() {
             Cadastre-se
           </ButtonGuest>
         ) : (
-          <Button onClick={() => addProductToCart()}>
+          <Button disabled={disable} onClick={() => addProductToCart()}>
             Adicionar ao Carrinho <img src={cartIconBlack} alt="Cart icon" />
           </Button>
         )}
