@@ -10,6 +10,7 @@ const Button = styled.button`
   justify-content: center;
   align-items: center;
 
+  margin-top: 20px;
   padding: 15px 20px;
 
   font-size: 1.5rem;
@@ -43,7 +44,17 @@ const OptionsContainer = styled.div`
   justify-content: center;
   gap: 10px;
 
-  padding-bottom: 20px;
+  margin-top: 5px;
+  padding: 15px 0px;
+
+  h2 {
+    padding-left: 25px;
+    margin-right: auto;
+
+    color: #d5d6d6;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
 `
 
 const Option = styled.div`
@@ -98,4 +109,79 @@ const SelectSecondDot = styled.div`
   border: 1px solid #fcd12c;
 `
 
-export { Button, OptionsContainer, Option, SelectFirstDot, SelectSecondDot }
+const ProductsContainer = styled.ul`
+  width: 100%;
+  max-height: 200px;
+
+  overflow-y: scroll;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  margin-top: 1px;
+  padding: 15px 20px;
+`
+
+const Product = styled.li`
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  width: 100%;
+`
+const Details = styled.div`
+  max-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  p {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #fcd12c;
+  }
+`
+const Image = styled.div`
+  width: 100px;
+  height: 80px;
+
+  background-image: ${(props) => `url(${props.image})`};
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+`
+
+const TopContent = styled.div`
+  h2 {
+    padding-left: 20px;
+
+    color: #d5d6d6;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+`
+const Total = styled.h2`
+  padding-top: 15px;
+  margin-right: auto;
+  padding-left: 25px;
+
+  color: #d5d6d6;
+  font-size: 1.2rem;
+  font-weight: 700;
+`
+
+export {
+  Button,
+  OptionsContainer,
+  Option,
+  SelectFirstDot,
+  SelectSecondDot,
+  ProductsContainer,
+  Product,
+  Image,
+  Details,
+  TopContent,
+  Total,
+}
