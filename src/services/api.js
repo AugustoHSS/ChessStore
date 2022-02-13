@@ -17,8 +17,9 @@ function getProduct(param) {
   return promise
 }
 
-function getCartProducts() {
-  const promise = axios.get(`${BASE_URL}/cart`)
+function getCartProducts(token) {
+  const config = createConfig(token)
+  const promise = axios.get(`${BASE_URL}/cart`, config)
   return promise
 }
 
@@ -27,11 +28,25 @@ function getCupom(param) {
   return promise
 }
 
+function addProductCart(body, token) {
+  const config = createConfig(token)
+  const promise = axios.post(`${BASE_URL}/cart`, body, config)
+  return promise
+}
+
+function deleteCartProduct(token, param) {
+  const config = createConfig(token)
+  const promise = axios.delete(`${BASE_URL}/cart/${param}`, config)
+  return promise
+}
+
 const api = {
   getProducts,
   getProduct,
   getCartProducts,
   getCupom,
+  addProductCart,
+  deleteCartProduct,
 }
 
 export default api
