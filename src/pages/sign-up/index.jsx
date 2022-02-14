@@ -1,78 +1,77 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import Input from '../../components/Input'
 import LoginButton from '../../components/LoginButton'
 import { Container, data } from './styles'
 import Logo from '../../assets/logo.png'
+import { useForm } from 'react-hook-form'
+import signUpSchema from '../../schemas/signUpSchema'
+import { joiResolver } from '@hookform/resolvers/joi'
+import api from '../../services/api'
 
 export default function SignUp() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: joiResolver(signUpSchema) })
 
-  function doSignUp(e) {
+  const onSubmit = (e, data) => {
+    doSignUp(e, data)
+  }
+  function doSignUp(data, e) {
+    console.log(data)
     e.preventDefault()
-    if (password !== confirmPassword) {
-      alert('As senhas não são iguais. Tente novamente.')
-      return
-    }
     setIsLoading(true)
-    const promise = axios.post('http://localhost:5000/sign-up', {
-      name,
-      email,
-      password,
-    })
+    delete data.confirmPassword
+    const promise = api.signUp(data)
     promise.then(() => {
       setIsLoading(false)
       navigate('/sign-in')
     })
     promise.catch((error) => {
-      alert(error.response.data)
       setIsLoading(false)
+      alert(error.response.data)
     })
   }
   return (
     <Container>
       <img src={Logo} alt="" />
       <h1>Chess Store</h1>
-      <form onSubmit={doSignUp}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <Input
-          type="text"
-          value={name}
-          disabled={isLoading}
-          onChange={(e) => setName(e.target.value)}
           placeholder="Nome"
-          required
-        />
-        <Input
-          type="email"
-          value={email}
+          {...register('name')}
           disabled={isLoading}
-          onChange={(e) => setEmail(e.target.value)}
+          isValid={!errors.name?.message}
+        />
+        <p>{errors.name?.message}</p>
+        <Input
           placeholder="E-mail"
-          required
+          {...register('email')}
+          disabled={isLoading}
+          isValid={!errors.email?.message}
         />
+        <p>{errors.email?.message}</p>
         <Input
           type="password"
-          value={password}
-          disabled={isLoading}
-          onChange={(e) => setPassword(e.target.value)}
           placeholder="Senha"
-          required
-        />
-        <Input
-          type="password"
-          value={confirmPassword}
+          {...register('password')}
           disabled={isLoading}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          placeholder="Confirme a senha"
-          required
+          isValid={!errors.password?.message}
         />
-        <LoginButton>
+        <p>{errors.password?.message}</p>
+        <Input
+          placeholder="Confirme a senha"
+          type="password"
+          {...register('confirmPassword')}
+          disabled={isLoading}
+          isValid={!errors.confirmPassword?.message}
+        />
+        <p>{errors.confirmPassword?.message}</p>
+        <LoginButton disabled={isLoading}>
           {isLoading ? <data.Component {...data.props} /> : 'Cadastrar'}
         </LoginButton>
       </form>

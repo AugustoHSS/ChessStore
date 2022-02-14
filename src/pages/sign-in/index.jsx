@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
-import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Input from '../../components/Input'
 import { Container, data } from './styles'
 import LoginButton from '../../components/LoginButton'
 import Logo from '../../assets/logo.png'
 import useAuth from '../../hook/useAuth'
+import api from '../../services/api'
 
 export default function SignIn() {
   const [email, setEmail] = useState('')
@@ -17,7 +17,7 @@ export default function SignIn() {
   function login(e) {
     e.preventDefault()
     setIsLoading(true)
-    const promise = axios.post('http://localhost:5000/sign-in', {
+    const promise = api.signIn({
       email,
       password,
     })
@@ -38,6 +38,7 @@ export default function SignIn() {
       <h1>Chess Store</h1>
       <form onSubmit={login}>
         <Input
+          isValid={true}
           type="email"
           value={email}
           disabled={isLoading}
@@ -46,6 +47,7 @@ export default function SignIn() {
           required
         />
         <Input
+          isValid={true}
           type="password"
           value={password}
           disabled={isLoading}

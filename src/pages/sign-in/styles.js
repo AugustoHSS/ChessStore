@@ -9,6 +9,7 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     a{
         all: unset;
         margin-top: 5%;
@@ -28,10 +29,10 @@ export const Container = styled.div`
 `;
 
 export const data = {
-  Component: ThreeDots,
-  props: {
-    height: 45,
-    width: 70,
-    color: '#22282C',
-  },
+    Component: ThreeDots,
+    props: {
+        height: 45,
+        width: 70,
+        color: '#22282C',
+    },
 };

@@ -45,6 +45,14 @@ function postCheckout(body, token) {
   const promise = axios.post(`${BASE_URL}/checkout`, body, config)
   return promise
 }
+function signIn(body) {
+  const promise = axios.post(`${BASE_URL}/sign-in`, body)
+  return promise
+}
+function signUp(body) {
+  const promise = axios.post(`${BASE_URL}/sign-up`, body)
+  return promise
+}
 
 const api = {
   getProducts,
@@ -54,6 +62,8 @@ const api = {
   addProductCart,
   deleteCartProduct,
   postCheckout,
+  signUp,
+  signIn,
 }
 
 export default api

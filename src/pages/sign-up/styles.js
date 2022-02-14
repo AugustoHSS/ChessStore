@@ -9,6 +9,11 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    p{
+        font-size:17px;
+        color: red;
+        margin: -13px 0 8px;
+    }
     a{
         all: unset;
         margin-top: 5%;
