@@ -8,12 +8,14 @@ import Product from './pages/product/Product'
 import { AuthProvider } from './context/AuthContext'
 import Cart from './pages/cart'
 import Checkout from './pages/checkout/Checkout'
+import Lobby from './pages/lobby'
 
 export default function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Lobby />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/home" element={<Home />} />

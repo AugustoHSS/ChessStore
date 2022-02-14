@@ -117,7 +117,10 @@ export default function Cart() {
             navigate('/checkout', {
               state: {
                 cart: cartProducts,
-                total: parseFloat(subTotal) * (1 - activeCupom),
+                total:
+                  activeCupom === 1
+                    ? subTotal
+                    : parseFloat(subTotal) * (1 - activeCupom),
               },
             })
           }
