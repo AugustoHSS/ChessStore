@@ -22,7 +22,6 @@ export default function SignUp() {
     doSignUp(e, data)
   }
   function doSignUp(data, e) {
-    console.log(data)
     e.preventDefault()
     setIsLoading(true)
     delete data.confirmPassword

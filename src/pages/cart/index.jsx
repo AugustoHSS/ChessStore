@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Cart() {
   const navigate = useNavigate()
-  const { token } = useAuth()
+  const { token, guest } = useAuth()
   const [cupom, setCupom] = useState('')
   const [activeCupom, setActiveCupom] = useState(1)
   const [cartProducts, setCartProducts] = useState([])
@@ -32,12 +32,16 @@ export default function Cart() {
     promise.catch((error) => console.log(error.response.data))
   }, [cartProducts, token])
 
-  function removeProduct() {
+  function removeProduct(product) {
     const answer = window.confirm(
       'Você realmente deseja deletar esse movimento?'
     )
     if (answer) {
-      api.deleteCartProduct(token)
+      const promise = api.deleteCartProduct(token, product)
+      promise.then((response) => {
+        setCartProducts(response.data)
+      })
+      promise.catch((error) => console.log(error.response))
     }
   }
   function printCartProducts() {
@@ -74,7 +78,7 @@ export default function Cart() {
       <Header>
         <img
           src={arrowBack}
-          onClick={() => navigate('/home')}
+          onClick={() => navigate(-1)}
           alt="Arrow back icon"
         />
         <h1>Chess Store</h1>
@@ -112,21 +116,26 @@ export default function Cart() {
             }`}</span>
           </div>
         </Prices>
-        <Button
-          onClick={() =>
-            navigate('/checkout', {
-              state: {
-                cart: cartProducts,
-                total:
-                  activeCupom === 1
-                    ? subTotal
-                    : parseFloat(subTotal) * (1 - activeCupom),
-              },
-            })
-          }
-        >
-          Finalizar a compra
-        </Button>
+        {guest ? (
+          <Button onClick={() => navigate('/sign-up')}>Cadastre-se</Button>
+        ) : (
+          <Button
+            disabled={cartProducts.length === 0}
+            onClick={() =>
+              navigate('/checkout', {
+                state: {
+                  cart: cartProducts,
+                  total:
+                    activeCupom === 1
+                      ? subTotal
+                      : parseFloat(subTotal) * (1 - activeCupom),
+                },
+              })
+            }
+          >
+            Finalizar a compra
+          </Button>
+        )}
       </Footer>
     </Container>
   )

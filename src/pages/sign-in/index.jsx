@@ -56,7 +56,7 @@ export default function SignIn() {
           required
         />
         <LoginButton>
-          {isLoading ? <data.Component {...data.props} /> : 'Cadastrar'}
+          {isLoading ? <data.Component {...data.props} /> : 'Entrar'}
         </LoginButton>
       </form>
       <Link to="/sign-up">Primeira vez? Cadastre-se!</Link>
