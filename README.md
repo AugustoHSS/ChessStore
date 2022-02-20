@@ -38,8 +38,10 @@ As a future feature you will be able to filter our products and see your purchas
 <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white"/>
 
 ## How to run
-
+Firstly you will need to run the [back-end](https://github.com/AugustoHSS/ChessStore-API), then just follow the next steps.
+  
 1. Clone this repository
+  
 2. Install dependencies
 ```bash
 npm i
@@ -48,8 +50,3 @@ npm i
 ```bash
 npm run start
 ```
-4.  You can optionally build the project running
-```bash
-npm run build
-```
-5. It's done! Preview the website on http://localhost:3000.
